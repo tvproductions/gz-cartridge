@@ -38,9 +38,9 @@ specific work. You can swap a cartridge without a change to the console. **[GUES
 
 | Layer | Owns | Relation to a cartridge |
 | --- | --- | --- |
-| gzkit | Governance facts and human acceptance | Optional. It can accept the evidence that a cartridge run produces. **[RECORD]** ([charter](../gzyoke/docs/charter.md): "GZKit governs, GZFactory orchestrates, GZYoke executes") |
+| gzkit | Governance facts and human acceptance | Optional. It can accept the evidence that a cartridge run produces. **[RECORD]** ([charter](https://github.com/tvproductions/gzyoke/blob/main/docs/charter.md): "GZKit governs, GZFactory orchestrates, GZYoke executes") |
 | gzfactory workflow (Prefect) | Step order, retries, run identity, state | An agentic step names one cartridge, which it loads and runs. **[GUESS]** |
-| gzfactory agentic step (Pydantic AI) | The agent loop, tools, model, typed result | The step receives the content of the cartridge as its task input, tools, limits, and output type. **[GUESS]** Pydantic AI as the executor is **[RECORD]** ([continuation design](../gzfactory/docs/superpowers/specs/2026-11-01-pueo-continuation-design.md)). |
+| gzfactory agentic step (Pydantic AI) | The agent loop, tools, model, typed result | The step receives the content of the cartridge as its task input, tools, limits, and output type. **[GUESS]** Pydantic AI as the executor is **[RECORD]** ([continuation design](https://github.com/tvproductions/gzfactory/blob/55a89854761fdf44b801912860c8247dea458d51/docs/superpowers/specs/2026-11-01-pueo-continuation-design.md)). |
 | GovZero guidance | Guidance for governed agentic work | A cartridge references guidance packs by identity and version. It does not copy them. **[GUESS]** |
 | gzyoke (owned inner loop) | One bounded model–tool–model run | The operator decided (2026-11-26) that gzfactory is the AFK engine: AFK sessions run as ordinary gzfactory workflows, and gzyoke executes inside each step. **[OPERATOR]** ([book comparison, choice B](https://claude.ai/artifact/GfLiP5ZxffGg597YfiWqGi)) So the step loads the cartridge and gzyoke can run it as its run request. **[GUESS]** How this relates to Pydantic AI as the executor is not yet reconciled. The gzyoke prototype still excludes gzfactory integration. **[RECORD]** |
 | Skills | "How we work here, and why": norms and rationale | Section 5 gives the proposed relation. |
@@ -85,17 +85,17 @@ input to gz-cartridge v0.1, not its schema.
 5. **Guidance references**: the skills and GovZero packs that apply, each with
    an identity and a version, and their precedence with operator and project
    rules. The precedence design is still open. **[RECORD]**
-   ([pueo reset handoff](../gzfactory/docs/handoffs/2026-11-01-pueo-architecture-reset.md))
+   ([pueo reset handoff](https://github.com/tvproductions/gzfactory/blob/55a89854761fdf44b801912860c8247dea458d51/docs/handoffs/2026-11-01-pueo-architecture-reset.md))
 6. **Tools and effects**: the tools that the agent can call, the effect category
    of each tool (read, propose, write, external), and what needs human approval.
    The runtime enforces this list before dispatch. The cartridge only declares it.
 7. **Capabilities required**: for example, reasoning or reliable tool calls.
    The executor or model is selected from this list. This field comes from
    pueo `Step.capabilities` **[RECORD]**
-   ([pueo spec language](../gzfactory/docs/history/pueo/docs/spec-language.md)).
+   ([pueo spec language](https://github.com/tvproductions/gzfactory/blob/55a89854761fdf44b801912860c8247dea458d51/docs/history/pueo/docs/spec-language.md)).
 8. **Limits**: model requests, tool dispatches, wall time, and output size.
    They must be finite. gzyoke uses the same kind of limits. **[RECORD]**
-   ([gzyoke minimal runtime](../gzyoke-edition-2/minimal-runtime.md))
+   (gzyoke edition-2 minimal runtime draft, project file `gzyoke-edition-2/minimal-runtime.md`, not in a repository)
 9. **Knowledge and memory**: the Graphify corpus that the agent can query, the
    Graphiti scope that it can read, and the memory writes that it can propose.
 10. **Evidence and acceptance**: what the run must record (inputs, guidance
