@@ -12,7 +12,7 @@ owner approves that design spec.
 
 ## Settled inputs
 
-- Purpose, boundaries and design rules: see `README.md` and ADR 0001.
+- Purpose, boundaries and design rules: see `README.md` and ADR-0001.
 - Cartridge parts (13): purpose, rationale, typed inputs and outputs, tools
   and effects, limits and stop rules, human gates, evidence, failure handling
   (retry, escalate to the owner, or stop), plus the parts listed in the

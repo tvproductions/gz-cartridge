@@ -1,6 +1,6 @@
 > Moved here on 2026-11-26 as historical input to the 0.1 spec. It was written
 > for the gzfactory agent before gz-cartridge existed. Where it conflicts with
-> ADR 0001 or `docs/design/map.md`, those win.
+> ADR-0001 or `docs/design/map.md`, those win.
 
 # Cartridge: brief for the gzfactory agent
 
