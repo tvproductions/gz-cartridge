@@ -16,7 +16,8 @@ owner approves that design spec.
 - Cartridge parts (13): purpose, rationale, typed inputs and outputs, tools
   and effects, limits and stop rules, human gates, evidence, failure handling
   (retry, escalate to the owner, or stop), plus the parts listed in the
-  original cartridge brief. Confirm the full list in the first session.
+  original cartridge brief
+  (`docs/design/cartridge-brief.md`, draft 0.7, historical input). Confirm the full list in the first session.
 - Authoring: a thin cartridge-writing skill with heavy tools; a human attests
   each version (Gate 5) before it can run.
 - A cartridge is self-contained and can live in gzkit or gzfactory projects.
@@ -39,6 +40,10 @@ owner approves that design spec.
 | T7 | Mission and run-request contents | HITL, after gzcontractor design | Shared records |
 
 ## Sources
+
+- Cartridge brief, draft 0.7 (2026-11-26): `docs/design/cartridge-brief.md`.
+  Written for gzfactory before this repository existed; its [GUESS] items
+  are not settled, and the tickets above supersede its open questions.
 
 - Prior-art survey (2026-11-26), project doc "gz-cartridge prior art".
 - Book-impact discussion, project doc "AI Agents in Action vs gzfactory and gzyoke".
