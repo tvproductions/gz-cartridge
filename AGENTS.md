@@ -10,3 +10,4 @@ Add project-owned rules, verification commands, and operational skill routing he
 - Use JSON Schema 2020-12. Reject unknown fields by default.
 - Keep runtime dependencies near zero. Every layer imports this package.
 - Record decisions in `docs/adr/`, numbered `NNNN-title.md`.
+- Open design questions live in `docs/design/map.md`. Read it before design work; do not answer HITL tickets for the owner.
