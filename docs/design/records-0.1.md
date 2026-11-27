@@ -323,8 +323,15 @@ whose structured output is most reliable on simple shapes.
 
 ## 8. The reference validator
 
-Strict hexagonal per gz-starter ADR-0006, Python standard library only at
-runtime **[PROPOSAL]**.
+Strict hexagonal per gz-starter ADR-0006, Python standard library only in the
+core (domain, ports, handlers) **[PROVISIONAL, Operator 2026-11-27]**.
+
+Pydantic stays out of the core for now. This follows the Operator's most
+recent direction, but the cross-repo ruling is not settled: gzkit's
+`docs/governance/hexagonal-architecture.md` still puts frozen Pydantic models
+in its kernel, which its domain imports. Until the Operator settles it across
+repos, Pydantic may appear only in an optional binding package that gzfactory
+can install, never in the core. Revisit this section when that ruling lands.
 
 | Part | Contents |
 | --- | --- |
@@ -386,5 +393,9 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    section 7 for 0.1? **Answered yes by the Operator, 2026-11-27.**
 6. **Validator.** Own small evaluator, standard library only, with
    `jsonschema` as a dev-only cross-check (section 8)?
+   **Provisional, Operator 2026-11-27:** keep Pydantic out of the core;
+   optional Pydantic binding only. The Pydantic-in-the-core question is open
+   across repos (gzkit's kernel uses it) and must be settled before the
+   validator ADR is approved.
 7. **Term.** Keep "run request" in gz-cartridge while gzyoke says "task
    request" internally?

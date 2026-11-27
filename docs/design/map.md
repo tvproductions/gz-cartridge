@@ -50,6 +50,7 @@ owner approves that design spec.
 | T4 | Survey MCP task states and A2A task states in depth; propose a mapping | AFK, done 2026-11-27 | T1 |
 | T5 | Read Oracle Open Agent Spec closely; list what to map to or reuse | AFK, done 2026-11-27 | Schema shape |
 | T6 | Check OpenAPI, JSON Schema 2020-12 and OCI digest practice (current docs) | AFK, done 2026-11-27 | T2, T3 |
+| T8 | Pydantic in the hex core: gzkit's kernel uses frozen Pydantic models; the Operator's recent direction keeps Pydantic out of the core. Settle across repos; gz-cartridge is provisionally stdlib-only in the core | HITL, cross-repo | Validator ADR |
 | T7 | Mission and run-request contents (run request drafted in records-0.1.md; mission stays out of 0.1) | HITL, after gzcontractor design | Shared records |
 
 ## Sources
