@@ -399,3 +399,7 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    validator ADR is approved.
 7. **Term.** Keep "run request" in gz-cartridge while gzyoke says "task
    request" internally?
+   **Operator, 2026-11-27:** align with gzkit's terms. A cartridge has a TASK
+   or TASKs, each connected to a REQ or a FIX. Where the TASK ids live, and
+   the record's name, are open as map ticket T9; sections 3 and 4 change
+   once T9 is answered.

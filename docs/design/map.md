@@ -31,6 +31,14 @@ owner approves that design spec.
 - Granularity (was Q3): a cartridge is likely atomic, the baseline work unit,
   and likely matches gzkit's Task. One cartridge is one workflow step; it does
   not span steps or call other cartridges. (Owner, 2026-11-27.)
+- gzkit terms (Operator, 2026-11-27): a cartridge has a TASK or TASKs, and
+  each TASK is connected to either a REQ or a FIX. gz-cartridge aligns with
+  gzkit's terms. In gzkit, a REQ is a catalog requirement
+  (`REQ-<semver>-<obpi>-<criterion>`), a FIX is a repair requirement (its own
+  `FIX-<n>` series, living in a repair order), and a TASK is a subdivision of
+  labor under one requirement (`TASK-<semver>-<obpi>-<req>-<seq>`). This
+  revises the earlier "cartridge likely matches gzkit's Task": a cartridge
+  carries TASKs rather than being one. See T9.
 - Skills (was Q4): a cartridge cites skills; it is not a kind of skill. GovZero's
   rule is thin skills, fat tools. (Owner, 2026-11-27.)
 - Name (was Q6): a cartridge is both hot-swappable and sealed. The idea is close
@@ -51,6 +59,7 @@ owner approves that design spec.
 | T5 | Read Oracle Open Agent Spec closely; list what to map to or reuse | AFK, done 2026-11-27 | Schema shape |
 | T6 | Check OpenAPI, JSON Schema 2020-12 and OCI digest practice (current docs) | AFK, done 2026-11-27 | T2, T3 |
 | T8 | Pydantic in the hex core: gzkit's kernel uses frozen Pydantic models; the Operator's recent direction keeps Pydantic out of the core. Settle across repos; gz-cartridge is provisionally stdlib-only in the core | HITL, cross-repo | Validator ADR |
+| T9 | TASK binding: does a cartridge name its TASK and REQ/FIX ids itself, or does the run request bind a reusable cartridge to them? And is the record still a "run request" under gzkit terms? | HITL | Cartridge and run request records |
 | T7 | Mission and run-request contents (run request drafted in records-0.1.md; mission stays out of 0.1) | HITL, after gzcontractor design | Shared records |
 
 ## Sources
