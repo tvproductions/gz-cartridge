@@ -42,10 +42,11 @@ owner approves that design spec.
 - Filled form (Operator, 2026-11-27): a cartridge is reusable only as a
   structure. Each cartridge is a "filled form" naming its own TASKs and their
   REQ or FIX, and its execution leaves a receipt. So the cartridge itself
-  names its TASK and REQ/FIX ids (answers the first half of T9). Open
-  follow-ups: does a filled cartridge replace the run request (one form in,
-  one receipt out)? Does Gate 5 attest each filled form, or the structure it
-  was filled from?
+  names its TASK and REQ/FIX ids (answers the first half of T9).
+- One form in, one receipt out (Operator, 2026-11-27): the filled cartridge
+  replaces the run request. A rerun is a fresh ticket: a new filled cartridge
+  that references its priors by digest, like commit hashes. Still open: does
+  Gate 5 attest each filled form, or the structure it was filled from?
 - Skills (was Q4): a cartridge cites skills; it is not a kind of skill. GovZero's
   rule is thin skills, fat tools. (Owner, 2026-11-27.)
 - Name (was Q6): a cartridge is both hot-swappable and sealed. The idea is close
@@ -66,7 +67,7 @@ owner approves that design spec.
 | T5 | Read Oracle Open Agent Spec closely; list what to map to or reuse | AFK, done 2026-11-27 | Schema shape |
 | T6 | Check OpenAPI, JSON Schema 2020-12 and OCI digest practice (current docs) | AFK, done 2026-11-27 | T2, T3 |
 | T8 | Pydantic in the hex core: gzkit's kernel uses frozen Pydantic models; the Operator's recent direction keeps Pydantic out of the core. Settle across repos; gz-cartridge is provisionally stdlib-only in the core | HITL, cross-repo | Validator ADR |
-| T9 | TASK binding: does a cartridge name its TASK and REQ/FIX ids itself, or does the run request bind a reusable cartridge to them? And is the record still a "run request" under gzkit terms? | HITL; first half settled 2026-11-27 (the filled cartridge names them); run request and Gate 5 follow-ups open | Cartridge and run request records |
+| T9 | TASK binding: does a cartridge name its TASK and REQ/FIX ids itself, or does the run request bind a reusable cartridge to them? And is the record still a "run request" under gzkit terms? | HITL; settled 2026-11-27 except Gate 5: the filled cartridge names them and replaces the run request; reruns reference priors by digest. Gate 5 scope open | Cartridge and run request records |
 | T7 | Mission and run-request contents (run request drafted in records-0.1.md; mission stays out of 0.1) | HITL, after gzcontractor design | Shared records |
 
 ## Sources

@@ -405,5 +405,8 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    once T9 is answered.
    **Operator, 2026-11-27:** a cartridge is reusable only as a structure;
    each cartridge is a filled form that names its TASKs and their REQ or
-   FIX, and its execution leaves a receipt (the outcome). Whether the filled
-   form replaces the run request, and what Gate 5 attests, are still open.
+   FIX, and its execution leaves a receipt (the outcome). **Same day:** the
+   filled form replaces the run request (one form in, one receipt out); a
+   rerun is a new filled cartridge that references its priors by digest.
+   What Gate 5 attests is still open. Sections 3, 4 and 6 are rewritten to
+   match once that is answered.
