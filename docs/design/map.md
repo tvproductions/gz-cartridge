@@ -2,8 +2,9 @@
 
 Status: open fog, 2026-11-26; Q3, Q4 and Q6 settled by the owner 2026-11-27.
 T4 to T6 researched 2026-11-27 ([research-t4-t5-t6.md](research-t4-t5-t6.md)).
-The 0.1 records design spec, with proposals for T1 to T3, is
-[records-0.1.md](records-0.1.md) and awaits the owner's review.
+The 0.1 records design spec is [records-0.1.md](records-0.1.md): form,
+attestation, cartridge (filled form) and outcome (receipt). It awaits the
+owner's review.
 Each ticket is HITL (only the owner can settle it, in a live session) or AFK
 (an agent can research it and report back). An agent never answers a HITL
 ticket on the owner's behalf.
@@ -45,8 +46,10 @@ owner approves that design spec.
   names its TASK and REQ/FIX ids (answers the first half of T9).
 - One form in, one receipt out (Operator, 2026-11-27): the filled cartridge
   replaces the run request. A rerun is a fresh ticket: a new filled cartridge
-  that references its priors by digest, like commit hashes. Still open: does
-  Gate 5 attest each filled form, or the structure it was filled from?
+  that references its priors by digest, like commit hashes.
+- Gate 5 scope (Operator, 2026-11-27): the Operator attests each revision of
+  the form (the structure), as design-time work. Filled cartridges are not
+  attested; code checks each against its attested form, so runs stay AFK.
 - Skills (was Q4): a cartridge cites skills; it is not a kind of skill. GovZero's
   rule is thin skills, fat tools. (Owner, 2026-11-27.)
 - Name (was Q6): a cartridge is both hot-swappable and sealed. The idea is close
@@ -67,7 +70,8 @@ owner approves that design spec.
 | T5 | Read Oracle Open Agent Spec closely; list what to map to or reuse | AFK, done 2026-11-27 | Schema shape |
 | T6 | Check OpenAPI, JSON Schema 2020-12 and OCI digest practice (current docs) | AFK, done 2026-11-27 | T2, T3 |
 | T8 | Pydantic in the hex core: gzkit's kernel uses frozen Pydantic models; the Operator's recent direction keeps Pydantic out of the core. Settle across repos; gz-cartridge is provisionally stdlib-only in the core | HITL, cross-repo | Validator ADR |
-| T9 | TASK binding: does a cartridge name its TASK and REQ/FIX ids itself, or does the run request bind a reusable cartridge to them? And is the record still a "run request" under gzkit terms? | HITL; settled 2026-11-27 except Gate 5: the filled cartridge names them and replaces the run request; reruns reference priors by digest. Gate 5 scope open | Cartridge and run request records |
+| T9 | TASK binding: does a cartridge name its TASK and REQ/FIX ids itself, or does the run request bind a reusable cartridge to them? And is the record still a "run request" under gzkit terms? | HITL, settled 2026-11-27: the filled cartridge names them and replaces the run request; reruns reference priors by digest; Gate 5 attests form revisions | Cartridge and run request records |
+| T10 | Id minting without gzkit: how a gz-starter project with no gzkit mints TASK, REQ and FIX ids for its cartridges | HITL | Cartridge record |
 | T7 | Mission and run-request contents (run request drafted in records-0.1.md; mission stays out of 0.1) | HITL, after gzcontractor design | Shared records |
 
 ## Sources
