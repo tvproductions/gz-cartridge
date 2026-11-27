@@ -68,7 +68,7 @@ changed after attestation without making a new version (Q6).
 | Instructions | `instructions` | Task text for this unit only; general norms come from skills |
 | Guidance references | `skills` | List of `{name, version}`; each cited skill must exist and carry its evaluation case |
 | Tools and effects | `tools` | List of `{name, effect}`; `effect` is `read`, `propose`, `write` or `external` |
-| Capabilities required | `capabilities` | For example `tool_calls`, `long_context`; the run request names the model that meets them |
+| Capabilities required | `capabilities`, `models` | `capabilities`: for example `tool_calls`, `long_context`. `models` (optional): the models the cartridge was shaped and tested for. The run request names the model (section 4) |
 | Limits and stop rules | `limits` | Every limit required and finite (section 3.1) |
 | Human gates | `approval_required_for` | Effect categories that need a human approval before dispatch; `write` and `external` at least |
 | Evidence | `evidence` | What the run must record, and the checks that test the output |
@@ -188,7 +188,7 @@ keeps its own word inside its code and maps it at its input port.
 | `cartridge` | `{name, version, digest}`; the digest must match the cartridge's computed digest |
 | `attestation_ref` | Pointer to the Gate 5 attestation of that digest (format is T3) |
 | `input` | Must be valid against the cartridge's `inputs` |
-| `model` | `{name}`; one named model, no fallback (gzyoke edition 3) |
+| `model` | `{name}`; one named model, no fallback (gzyoke edition 3). If the cartridge has `models`, it must be one of them; otherwise any model with the cartridge's `capabilities` |
 | `judge_model` | `{name}`, required when any evidence check is `llm_judge`; must differ from `model` |
 | `limits` | Optional; each value may only tighten the cartridge's limit |
 | `effects_approved` | Effect categories approved for this run. Default: the cartridge's declared effects that are `read` or `propose` |
@@ -377,8 +377,10 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    **Digest answered yes by the Operator, 2026-11-27. Minimal attestation
    record (digest, role, time, optional note, no signatures) answered yes the
    same day.**
-4. **Model.** The run request names the model; the cartridge only lists
-   capabilities. (The map's machine note guessed the cartridge names it.)
+4. **Model.** **Settled by the Operator, 2026-11-27:** the run request names
+   the model. The cartridge lists `capabilities` and may also list `models`
+   it was shaped and tested for; when it does, the run request must pick one
+   of them.
 5. **Schema subset.** Limit cartridge `inputs` and `outputs` to the subset in
    section 7 for 0.1?
 6. **Validator.** Own small evaluator, standard library only, with

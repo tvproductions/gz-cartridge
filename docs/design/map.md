@@ -36,8 +36,9 @@ owner approves that design spec.
 - Name (was Q6): a cartridge is both hot-swappable and sealed. The idea is close
   to containerization, applied to bounding a work unit. (Owner, 2026-11-27.)
 - Machines: the Mac mini runs local models; `tux` might orchestrate
-  (gzcontractor and/or gzfactory). A cartridge names its model, not a machine
-  (drafter's inference, not yet confirmed). (Owner, 2026-11-27.)
+  (gzcontractor and/or gzfactory). A cartridge never names a machine. The run request
+  names the model; a cartridge may list the models it was shaped for, and then
+  the run request must pick one (Operator, 2026-11-27). (Owner, 2026-11-27.)
 
 ## Tickets
 
