@@ -71,7 +71,7 @@ changed after attestation without making a new version (Q6).
 | Guidance references | `skills` | List of `{name, version}`; each cited skill must exist and carry its evaluation case |
 | Tools and effects | `tools` | List of `{name, effect}`; `effect` is `read`, `propose`, `write` or `external` |
 | Capabilities required | `capabilities` | For example `tool_calls`, `long_context`; the run request names the model that meets them |
-| Limits and stop rules | `limits` | Every limit required and finite (section 5) |
+| Limits and stop rules | `limits` | Every limit required and finite (section 3.1) |
 | Human gates | `approval_required_for` | Effect categories that need a human approval before dispatch; `write` and `external` at least |
 | Evidence | `evidence` | What the run must record, and the checks that test the output |
 | Knowledge and memory | `knowledge` | `read_scopes` (list, may be empty); 0.1 proposes no memories |
@@ -156,6 +156,25 @@ Rules beyond the schema (checked by the validator's domain):
 - `evidence.checks[].kind` is `code` or `llm_judge`. An LLM judge must be a
   different model from the one that ran; the run request records both.
 
+### 3.1 Limits
+
+Every field is required in a cartridge, except `token_budget`. Each value is
+a positive integer (or a positive finite number for times); zero, negative,
+non-finite and missing values are rejected. A run request may set any of them
+again, but only lower. Counting follows gzyoke edition 3.
+
+| Field | Counts | Trips stop reason |
+| --- | --- | --- |
+| `max_model_requests` | Every model invocation, including failed ones | `request_limit` |
+| `max_tool_calls` | Every attempted tool dispatch, checked before the call; denied or invalid proposals do not count | `tool_limit` |
+| `deadline_seconds` | Wall time from run start | `deadline` |
+| `operation_timeout_seconds` | One awaited model or tool operation | `operation_timeout` |
+| `max_observation_bytes` | UTF-8 bytes of one tool observation; longer results are cut, not stopped | (none: truncation is recorded) |
+| `max_final_bytes` | UTF-8 bytes of the final answer | `final_size` |
+| `context_budget_bytes` | UTF-8 bytes of one assembled model request | `context_limit` |
+| `max_repeated_calls` | Consecutive repeats of an already answered call fingerprint | `repeated_call` |
+| `token_budget` (optional) | Model tokens, only when the model reports usage; a request for it against a model that cannot report is rejected | `token_budget` |
+
 ## 4. The run request record
 
 gzfactory writes one run request per run. It pins one attested cartridge
@@ -174,16 +193,22 @@ keeps its own word inside its code and maps it at its input port.
 | `model` | `{name}`; one named model, no fallback (gzyoke edition 3) |
 | `judge_model` | `{name}`, required when any evidence check is `llm_judge`; must differ from `model` |
 | `limits` | Optional; each value may only tighten the cartridge's limit |
-| `effects_approved` | Effect categories approved for this run. Default and AFK: `read` and `propose` only |
-| `approval_ref` | Required when `effects_approved` holds `write` or `external`: a pointer to the Operator's approval of that workflow |
+| `effects_approved` | Effect categories approved for this run. Default: the cartridge's declared effects that are `read` or `propose` |
+| `approval_ref` | Required when `effects_approved` holds any effect in the cartridge's `approval_required_for`: a pointer to the human approval of that effect for this workflow |
 | `attended` | `true` when a human watches the run, `false` for AFK |
 | `requested_at` | RFC 3339 time |
 
 Rules beyond the schema:
 
-- Unattended means diagnosis-only (gzkit ADR-0.0.62): when `attended` is
-  `false`, `write` or `external` in `effects_approved` needs `approval_ref`.
 - `effects_approved` may only name effects the cartridge's tools declare.
+- Every effect in `effects_approved` that the cartridge lists in
+  `approval_required_for` needs `approval_ref`, attended or not. The executor
+  checks it before the first dispatch, not when the effect is first used.
+- Unattended means diagnosis-only (gzkit ADR-0.0.62): when `attended` is
+  `false`, the default above is all a run gets unless `approval_ref` points to
+  the Operator's approval of that workflow to change things. Because `write`
+  and `external` are always in `approval_required_for`, the rule above
+  already enforces this.
 - An executor refuses a request whose cartridge digest, attestation or input
   does not check out, and reports `rejected` (section 5).
 
@@ -202,8 +227,21 @@ five, plus `rejected` from A2A.
 | `stopped` | A limit tripped; `stop_reason` says which | `failed` |
 | `blocked` | A human decision is needed (approval, escalation) | `input_required` |
 | `cancelled` | The caller cancelled the run | `cancelled` / `canceled` |
-| `failed` | An operational error ended the run | `failed` |
+| `failed` | The run ended without an acceptable answer; `failure_kind` says why | `failed` |
 | `rejected` | The run never started: bad digest, missing attestation, invalid input | A2A `rejected` |
+
+`failure_kind` (required exactly when `status` is `failed`) **[PROPOSAL]**:
+`operational` (model, tool, journal or policy error), `output_invalid` (the
+final answer does not match the cartridge's `outputs`) or `check_failed` (a
+code evidence check failed). The cartridge's `failure_handling.failed` policy
+applies to all three. An answer can only end `done_proposed` when it matches
+`outputs` and every `code` check passed; an `llm_judge` check is run by the
+caller after the outcome, because judging is part of acceptance.
+
+`rejection_reason` (required exactly when `status` is `rejected`):
+`digest_mismatch`, `not_attested`, `invalid_input`, `invalid_request`,
+`effect_not_declared` or `approval_missing`. Rejection is never retried
+automatically; it always goes back to whoever wrote the run request.
 
 `stop_reason` (required exactly when `status` is `stopped`), from gzyoke
 edition 3: `request_limit`, `tool_limit`, `deadline`, `operation_timeout`,
@@ -220,6 +258,12 @@ edition 3: `request_limit`, `tool_limit`, `deadline`, `operation_timeout`,
 | `evidence` | `{journal_ref, last_event_seq}`: where the run's journal is, and the last committed event |
 | `proposed_memories` | Always an empty list in 0.1 |
 | `started_at`, `ended_at` | RFC 3339 times |
+
+A `rejected` outcome reports no execution it did not do: `started_at`,
+`model` and `evidence` are `null`, `usage` counts are `0` with provenance
+`unavailable`, `checks` is empty, and `ended_at` is when the request was
+refused. The validator rejects a `rejected` outcome that carries any other
+values in these fields.
 
 Example (non-normative):
 
@@ -294,6 +338,12 @@ do the checking.
 
 Each step is one small PR:
 
+0. ADRs for the lasting choices this design makes: the record envelope and
+   versioning (T2), the outcome statuses (T1), the digest (T3) and the
+   validator's architecture. Each ADR edition needs the Operator's own
+   approval, separately from approving this design; per the gz-starter ADR
+   policy, approving a design does not approve an ADR. No step below that
+   depends on an ADR starts before that ADR edition is approved.
 1. `spec/` prose for the three records, `schema/*.json` and the examples,
    from this design as approved.
 2. The validator skeleton: six parts, configurator, import-rule test, CI.
