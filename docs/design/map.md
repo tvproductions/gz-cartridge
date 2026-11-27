@@ -43,7 +43,7 @@ owner approves that design spec.
 
 | ID | Question | Mode | Blocks |
 | --- | --- | --- | --- |
-| T1 | Outcome states: adopt MCP task states as is, or extend with gzyoke's `blocked` and `limit_exceeded`? | HITL, after T4 | Outcome record |
+| T1 | Outcome states: adopt MCP task states as is, or extend with gzyoke's `blocked` and `limit_exceeded`? | HITL, settled 2026-11-27: gzyoke edition 3's five plus `rejected` (records-0.1.md section 5); ADR to follow | Outcome record |
 | T2 | Versioning: semver for the spec, and how each document declares its version | HITL | Every document |
 | T3 | Attestation: what exact bytes a Gate 5 digest covers, and its format | HITL | Gate 5 records |
 | T4 | Survey MCP task states and A2A task states in depth; propose a mapping | AFK, done 2026-11-27 | T1 |

@@ -218,8 +218,8 @@ One outcome per run, written by the executor. It is the run's last word. It
 never says the work is done; it says the model proposed done and the run's
 own checks passed.
 
-**[PROPOSAL, T1]** `status` is one of six terminal values: gzyoke edition 3's
-five, plus `rejected` from A2A.
+**[SETTLED, T1, Operator 2026-11-27]** `status` is one of six terminal values:
+gzyoke edition 3's five, plus `rejected` from A2A.
 
 | `status` | Meaning | MCP / A2A nearest |
 | --- | --- | --- |
@@ -358,6 +358,7 @@ gzyoke's Stage 3 records then track these records, as edition 3 asks.
 Asked one at a time, in this order. Answers are recorded here and in the map.
 
 1. **T1.** Outcome statuses: gzyoke's five plus `rejected` (section 5)?
+   **Answered yes by the Operator, 2026-11-27.**
 2. **T2.** Envelope: `spec_version` (semver) and `kind` in every document,
    with breaking minor bumps allowed before 1.0 (section 2)?
 3. **T3.** Digest: SHA-256 over RFC 8785 canonical JSON, written
