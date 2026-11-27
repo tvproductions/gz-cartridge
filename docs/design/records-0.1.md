@@ -40,7 +40,7 @@ Out of 0.1, with the reason:
 
 ## 2. Shared rules for every document
 
-1. **Envelope.** **[PROPOSAL, T2]** Every document starts with two fields:
+1. **Envelope.** **[SETTLED, T2, Operator 2026-11-27]** Every document starts with two fields:
    `spec_version` (the gz-cartridge version it follows, semver, for example
    `"0.1.0"`) and `kind` (`"cartridge"`, `"run_request"` or `"outcome"`).
    This follows OpenAPI's in-document version and Agent Spec's type tag.
@@ -361,6 +361,7 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    **Answered yes by the Operator, 2026-11-27.**
 2. **T2.** Envelope: `spec_version` (semver) and `kind` in every document,
    with breaking minor bumps allowed before 1.0 (section 2)?
+   **Answered yes by the Operator, 2026-11-27.**
 3. **T3.** Digest: SHA-256 over RFC 8785 canonical JSON, written
    `sha256:<hex>` (section 6)? And what must the attestation record hold?
 4. **Model.** The run request names the model; the cartridge only lists
