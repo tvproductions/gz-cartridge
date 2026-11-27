@@ -21,7 +21,8 @@ In 0.1:
 | `run_request` | gzfactory, once per run of one workflow step | gzyoke or another layer-1 executor |
 | `outcome` | gzyoke or another layer-1 executor, once per run | gzfactory (accept, retry, escalate) |
 
-Plus a reference validator for all three, and the checks that span them.
+Plus a minimal `attestation` record (section 6), a reference validator for
+all four, and the checks that span them.
 
 Out of 0.1, with the reason:
 
@@ -30,9 +31,6 @@ Out of 0.1, with the reason:
 - **Acceptance record.** The model only proposes done; code or a human
   accepts. Acceptance is gzfactory's record (Gate 5 at the work order), so
   0.1 only makes sure the outcome never claims it.
-- **Attestation record format** (T3). 0.1 fixes the digest the attestation
-  covers, and a run request points to the attestation, but the record's own
-  fields wait for the Operator's answer on T3.
 - **Memory.** gzyoke Stage 3 has no memory, and durable memory is admitted
   only after acceptance outside the agent. 0.1 keeps a declared read scope
   and an always-empty list of proposed memories, so the fields exist when the
@@ -296,8 +294,20 @@ whitespace and key order cannot change identity, and any change to content
 does. The form `algorithm:encoded` follows OCI, so another algorithm can be
 added later.
 
-The attestation record itself (who attested, when, how it is signed or
-stored) waits for the Operator's answer to T3.
+**[SETTLED, T3 attestation, Operator 2026-11-27]** The Gate 5 attestation is
+a minimal record of `kind` `"attestation"`:
+
+| Field | Rule |
+| --- | --- |
+| `cartridge` | `{name, version, digest}` of the attested cartridge |
+| `gate` | Always `"5"` in 0.1 |
+| `attested_by` | A role, for example `"operator"`, never a personal name |
+| `attested_at` | RFC 3339 time |
+| `note` | Optional short text |
+
+No signatures in 0.1. Where attestations are stored is the reader's choice;
+a run request's `attestation_ref` points to one, and the executor checks that
+its digest matches the pinned cartridge before the run starts.
 
 ## 7. JSON Schema subset for cartridge inputs and outputs
 
@@ -364,8 +374,9 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    **Answered yes by the Operator, 2026-11-27.**
 3. **T3.** Digest: SHA-256 over RFC 8785 canonical JSON, written
    `sha256:<hex>` (section 6)? And what must the attestation record hold?
-   **Digest answered yes by the Operator, 2026-11-27.** The attestation
-   record's contents are still open.
+   **Digest answered yes by the Operator, 2026-11-27. Minimal attestation
+   record (digest, role, time, optional note, no signatures) answered yes the
+   same day.**
 4. **Model.** The run request names the model; the cartridge only lists
    capabilities. (The map's machine note guessed the cartridge names it.)
 5. **Schema subset.** Limit cartridge `inputs` and `outputs` to the subset in
