@@ -403,3 +403,7 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    or TASKs, each connected to a REQ or a FIX. Where the TASK ids live, and
    the record's name, are open as map ticket T9; sections 3 and 4 change
    once T9 is answered.
+   **Operator, 2026-11-27:** a cartridge is reusable only as a structure;
+   each cartridge is a filled form that names its TASKs and their REQ or
+   FIX, and its execution leaves a receipt (the outcome). Whether the filled
+   form replaces the run request, and what Gate 5 attests, are still open.
