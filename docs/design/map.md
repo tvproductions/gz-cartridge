@@ -1,6 +1,9 @@
 # gz-cartridge design map
 
-Status: open fog, 2026-11-26; Q3, Q4 and Q6 settled by the owner 2026-11-27. Resolve these before drafting the 0.1 spec.
+Status: open fog, 2026-11-26; Q3, Q4 and Q6 settled by the owner 2026-11-27.
+T4 to T6 researched 2026-11-27 ([research-t4-t5-t6.md](research-t4-t5-t6.md)).
+The 0.1 records design spec, with proposals for T1 to T3, is
+[records-0.1.md](records-0.1.md) and awaits the owner's review.
 Each ticket is HITL (only the owner can settle it, in a live session) or AFK
 (an agent can research it and report back). An agent never answers a HITL
 ticket on the owner's behalf.
@@ -43,10 +46,10 @@ owner approves that design spec.
 | T1 | Outcome states: adopt MCP task states as is, or extend with gzyoke's `blocked` and `limit_exceeded`? | HITL, after T4 | Outcome record |
 | T2 | Versioning: semver for the spec, and how each document declares its version | HITL | Every document |
 | T3 | Attestation: what exact bytes a Gate 5 digest covers, and its format | HITL | Gate 5 records |
-| T4 | Survey MCP task states and A2A task states in depth; propose a mapping | AFK | T1 |
-| T5 | Read Oracle Open Agent Spec closely; list what to map to or reuse | AFK | Schema shape |
-| T6 | Check OpenAPI, JSON Schema 2020-12 and OCI digest practice (current docs) | AFK | T2, T3 |
-| T7 | Mission and run-request contents | HITL, after gzcontractor design | Shared records |
+| T4 | Survey MCP task states and A2A task states in depth; propose a mapping | AFK, done 2026-11-27 | T1 |
+| T5 | Read Oracle Open Agent Spec closely; list what to map to or reuse | AFK, done 2026-11-27 | Schema shape |
+| T6 | Check OpenAPI, JSON Schema 2020-12 and OCI digest practice (current docs) | AFK, done 2026-11-27 | T2, T3 |
+| T7 | Mission and run-request contents (run request drafted in records-0.1.md; mission stays out of 0.1) | HITL, after gzcontractor design | Shared records |
 
 ## Sources
 
