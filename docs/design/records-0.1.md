@@ -312,7 +312,8 @@ its digest matches the pinned cartridge before the run starts.
 ## 7. JSON Schema subset for cartridge inputs and outputs
 
 Cartridge authors write `inputs` and `outputs` as JSON Schema. To keep the
-validator tiny and its errors good, **[PROPOSAL]** 0.1 allows only this subset:
+validator tiny and its errors good, **[SETTLED, Operator 2026-11-27]** 0.1
+allows only this subset:
 `type`, `properties`, `required`, `additionalProperties` (must be `false` on
 every object), `items`, `enum`, `const`, `minLength`, `maxLength`, `minimum`,
 `maximum`, `minItems`, `maxItems`, `pattern`, `description`, `title`.
@@ -382,7 +383,7 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    it was shaped and tested for; when it does, the run request must pick one
    of them.
 5. **Schema subset.** Limit cartridge `inputs` and `outputs` to the subset in
-   section 7 for 0.1?
+   section 7 for 0.1? **Answered yes by the Operator, 2026-11-27.**
 6. **Validator.** Own small evaluator, standard library only, with
    `jsonschema` as a dev-only cross-check (section 8)?
 7. **Term.** Keep "run request" in gz-cartridge while gzyoke says "task
