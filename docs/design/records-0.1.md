@@ -288,7 +288,7 @@ Example (non-normative):
 
 ## 6. Digest and attestation
 
-**[PROPOSAL, T3]** A cartridge's identity for Gate 5 is
+**[SETTLED, T3 digest, Operator 2026-11-27]** A cartridge's identity for Gate 5 is
 `sha256:` plus the lowercase hex SHA-256 of the cartridge document in RFC 8785
 canonical form (JSON Canonicalization Scheme). The digest covers the whole
 document; the document never contains its own digest. Canonical form means
@@ -364,6 +364,8 @@ Asked one at a time, in this order. Answers are recorded here and in the map.
    **Answered yes by the Operator, 2026-11-27.**
 3. **T3.** Digest: SHA-256 over RFC 8785 canonical JSON, written
    `sha256:<hex>` (section 6)? And what must the attestation record hold?
+   **Digest answered yes by the Operator, 2026-11-27.** The attestation
+   record's contents are still open.
 4. **Model.** The run request names the model; the cartridge only lists
    capabilities. (The map's machine note guessed the cartridge names it.)
 5. **Schema subset.** Limit cartridge `inputs` and `outputs` to the subset in
