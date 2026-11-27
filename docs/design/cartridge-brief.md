@@ -4,12 +4,12 @@
 
 # Cartridge: brief for the gzfactory agent
 
-Status: **draft 0.7, 2026-11-26, not approved.** Jeffry (the operator) coined
+Status: **draft 0.7, 2026-11-26, not approved.** The Operator coined
 the term "cartridge" in conversations that are not recorded in this project.
 This brief reconstructs the idea from gzfactory's and gzyoke's design records.
 The tags below show how far you can rely on each statement:
 
-- **[OPERATOR]**: Jeffry said it. You can rely on it.
+- **[OPERATOR]**: The Operator said it. You can rely on it.
 - **[RECORD]**: an existing gzfactory or gzyoke document says it. The source is linked.
 - **[GUESS]**: the drafter inferred it. Do not design or build on it until the
   operator confirms it. Section 7 lists the open questions.
@@ -141,7 +141,7 @@ Step 1 is **[OPERATOR]**. The other steps are **[GUESS]**.
 
 ## 5. Cartridge and skills: proposed division
 
-Jeffry treats skills as a durable record of "how we work here, and why", not as
+The Operator treats skills as a durable record of "how we work here, and why", not as
 disposable how-to text. **[OPERATOR]** Guardrails belong in runtime
 enforcement. Intent belongs in written artifacts and human gates. **[OPERATOR]**
 
