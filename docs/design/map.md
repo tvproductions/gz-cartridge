@@ -1,6 +1,6 @@
 # gz-cartridge design map
 
-Status: open fog, 2026-11-26. Resolve these before drafting the 0.1 spec.
+Status: open fog, 2026-11-26; Q3, Q4 and Q6 settled by the owner 2026-11-27. Resolve these before drafting the 0.1 spec.
 Each ticket is HITL (only the owner can settle it, in a live session) or AFK
 (an agent can research it and report back). An agent never answers a HITL
 ticket on the owner's behalf.
@@ -19,18 +19,27 @@ owner approves that design spec.
   original cartridge brief
   (`docs/design/cartridge-brief.md`, draft 0.7, historical input). Confirm the full list in the first session.
 - Authoring: a thin cartridge-writing skill with heavy tools; a human attests
-  each version (Gate 5) before it can run.
+  each version (Gate 5) before it can run. An agent can likely run the skill
+  unattended up to Gate 5. The skill needs at least one evaluation case.
+  (Owner, 2026-11-27.)
 - A cartridge is self-contained and can live in gzkit or gzfactory projects.
 - Layers: gzcontractor (3) sequences cartridges, gzfactory (2) runs them,
   gzyoke or Pydantic AI (1) executes one.
+- Granularity (was Q3): a cartridge is likely atomic, the baseline work unit,
+  and likely matches gzkit's Task. One cartridge is one workflow step; it does
+  not span steps or call other cartridges. (Owner, 2026-11-27.)
+- Skills (was Q4): a cartridge cites skills; it is not a kind of skill. GovZero's
+  rule is thin skills, fat tools. (Owner, 2026-11-27.)
+- Name (was Q6): a cartridge is both hot-swappable and sealed. The idea is close
+  to containerization, applied to bounding a work unit. (Owner, 2026-11-27.)
+- Machines: the Mac mini runs local models; `tux` might orchestrate
+  (gzcontractor and/or gzfactory). A cartridge names its model, not a machine
+  (drafter's inference, not yet confirmed). (Owner, 2026-11-27.)
 
 ## Tickets
 
 | ID | Question | Mode | Blocks |
 | --- | --- | --- | --- |
-| Q3 | One cartridge per workflow step, or can a cartridge span steps or call others? | HITL | Schema shape |
-| Q4 | Does a cartridge cite skills, or is it a kind of skill? | HITL | Relation to Agent Skills |
-| Q6 | What does the name "cartridge" imply (swappable, sealed, versioned)? | HITL | Vocabulary, docs |
 | T1 | Outcome states: adopt MCP task states as is, or extend with gzyoke's `blocked` and `limit_exceeded`? | HITL, after T4 | Outcome record |
 | T2 | Versioning: semver for the spec, and how each document declares its version | HITL | Every document |
 | T3 | Attestation: what exact bytes a Gate 5 digest covers, and its format | HITL | Gate 5 records |
