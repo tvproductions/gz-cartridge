@@ -4,7 +4,7 @@
 
 # Cartridge: brief for the gzfactory agent
 
-Status: **draft 0.7, 2026-11-26, not approved.** The Operator coined
+Status: **draft 0.8, 2026-11-27 answers recorded, 2026-11-26, not approved.** The Operator coined
 the term "cartridge" in conversations that are not recorded in this project.
 This brief reconstructs the idea from gzfactory's and gzyoke's design records.
 The tags below show how far you can rely on each statement:
@@ -95,7 +95,7 @@ input to gz-cartridge v0.1, not its schema.
    ([pueo spec language](https://github.com/tvproductions/gzfactory/blob/55a89854761fdf44b801912860c8247dea458d51/docs/history/pueo/docs/spec-language.md)).
 8. **Limits**: model requests, tool dispatches, wall time, and output size.
    They must be finite. gzyoke uses the same kind of limits. **[RECORD]**
-   (gzyoke edition-2 minimal runtime draft, project file `gzyoke-edition-2/minimal-runtime.md`, not in a repository)
+   ([gzyoke minimal runtime](https://github.com/tvproductions/gzyoke/blob/main/docs/history/runtime-editions/minimal-runtime-edition-2.md))
 9. **Knowledge and memory**: the Graphify corpus that the agent can query, the
    Graphiti scope that it can read, and the memory writes that it can propose.
 10. **Evidence and acceptance**: what the run must record (inputs, guidance
@@ -180,17 +180,21 @@ copies of its skills so that it is fully portable.
 1. **Contents.** Answered: the eleven fields are a good start, plus a
    rationale and failure handling (items 12 and 13).
 2. **Authors.** Answered: a cartridge-writing skill, with human Gate 5
-   review and attestation; thin skills, heavy tools. Open: may an agent run
-   the skill unattended up to Gate 5, and which tools are first?
-3. **Load and run.** Answered in part: a cartridge plugs into one gzfactory
-   workflow step, and gzyoke executes inside the step. Open: does one step load
-   exactly one cartridge? Can a
-   cartridge contain several steps, or call other cartridges?
-4. **Skills.** Is the division in section 5 correct (a cartridge cites skills),
-   or is a cartridge a type of skill?
+   review and attestation; thin skills, heavy tools. An agent can likely run
+   the skill unattended up to Gate 5 (2026-11-27). **[OPERATOR]** The skill
+   needs at least one evaluation case. **[OPERATOR]** Open: which tools come first?
+3. **Load and run.** Answered (2026-11-27): a cartridge is atomic, the
+   baseline work unit, and likely matches gzkit's Task. It plugs into one
+   gzfactory workflow step, and gzyoke executes it. It does not span steps or
+   call other cartridges. **[OPERATOR]**
+4. **Skills.** Answered (2026-11-27): yes, a cartridge cites skills. GovZero's
+   rule is thin skills, fat tools. **[OPERATOR]**
 5. **Portability.** Answered by `gz-cartridge`: one dependency-free JSON
    Schema that every layer consumes. Earlier note: the cartridge is self-contained and can
-   live in gzkit or gzfactory, so it must be portable across layers. Open: must the same cartridge run in both gzfactory (Pydantic AI)
-   and gzyoke? Must it run on the Mac mini and on `tux`?
-6. **Origin.** Does the name carry a specific meaning that this brief misses,
-   for example hot-swap, sealed and read-only, or one per machine?
+   live in gzkit or gzfactory, so it must be portable across layers. Machines
+   (2026-11-27): the Mac mini runs local models; `tux` might orchestrate
+   (gzcontractor and/or gzfactory). **[OPERATOR]** A cartridge therefore names
+   its model but not a machine. **[GUESS]**
+6. **Origin.** Answered (2026-11-27): both hot-swappable and sealed. The
+   idea is close to containerization, applied to bounding a work unit.
+   **[OPERATOR]**
