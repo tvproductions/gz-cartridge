@@ -183,7 +183,7 @@ copies of its skills so that it is fully portable.
    review and attestation; thin skills, heavy tools. An agent can likely run
    the skill unattended up to Gate 5 (2026-11-27). **[OPERATOR]** The skill
    needs at least one evaluation case. **[OPERATOR]** Open: which tools come first?
-3. **Load and run.** Answered (2026-11-27): a cartridge is atomic, the
+3. **Load and run.** Answered (2026-11-27): a cartridge is likely atomic, the
    baseline work unit, and likely matches gzkit's Task. It plugs into one
    gzfactory workflow step, and gzyoke executes it. It does not span steps or
    call other cartridges. **[OPERATOR]**
